@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Registrar-se</title>
+  <style>
+    body {
+      margin: 0;
+      height: 100vh;
+      background-color: #73edff !important;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-family: Arial, sans-serif;
+      position: relative;
+      color: #000078;
+    }
+    form {
+      background: rgba(255, 255, 255, 0.7);
+      padding: 30px;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.2);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      min-width: 300px;
+      color: #000078;
+    }
+  </style>
+</head>
+<body>
+  <img src="logo.png" alt="Logo" class="logo" style="position:absolute; top:20px; right:20px; width:100px;">
+  <form action="/register" method="post">
+    <label for="nom">Nom d'usuari:</label>
+    <input type="text" id="nom" name="nom" required>
+    <label for="password">Contrasenya:</label>
+    <input type="password" id="password" name="password" required>
+    <button type="submit">Registra’t</button>
+    <a href="/login">Inicia sessió</a>
+  </form>
+</body>
+</html>
+
+

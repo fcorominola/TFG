@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="ca">
+<head>
+  <meta charset="UTF-8" />
+  <title>Formulari d'Accessibilitat Post-ruta</title>
+  <style>
+    body {
+      margin: 0;
+      height: 100vh;
+      background-color: #73edff !important;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-family: Arial, sans-serif;
+      position: relative;
+      color: #000078;
+    }
+
+    .container {
+      background: rgba(255, 255, 255, 0.7);
+      padding: 30px;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.2);
+      max-width: 600px;
+      width: 100%;
+      overflow-y: auto;
+      max-height: 90vh;
+    }
+
+    h1, h3 {
+      margin-top: 0;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 5px;
+    }
+
+    p {
+      margin-top: 1rem;
+      font-weight: bold;
+    }
+
+    textarea, input[type="number"] {
+      width: 100%;
+      padding: 8px;
+      margin-top: 5px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      resize: vertical;
+    }
+
+    button {
+      margin-top: 20px;
+      background-color: #000078;
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 1rem;
+    }
+
+    button:hover {
+      background-color: #000050;
+    }
+
+    .logo {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      width: 100px;
+    }
+  </style>
+</head>
+<body>
+  <img src="/logo.png" alt="Logo" class="logo">
+  <div class="container">
+    <h1>Formulari sobre accessibilitat (Post-ruta)</h1>
+    <form method="POST" action="/post_submit">
+      <input type="hidden" name="idAnswer" value="<%= idAnswer %>" />
+
+      <h3>Preguntes post-ruta:</h3>
+
+      <p>Has pogut transitar sense dificultats durant tota la ruta?</p>
+      <label><input type="radio" name="transitabilitat" value="Sí" required> Sí</label>
+      <label><input type="radio" name="transitabilitat" value="No"> No</label>
+
+      <p>L’amplada de les voreres era suficient per moure’t amb facilitat?</p>
+      <label><input type="radio" name="amplada_voreres" value="Sí" required> Sí</label>
+      <label><input type="radio" name="amplada_voreres" value="No"> No</label>
+
+      <p>Si la resposta és no, indica quin o quins carrers has trobat dificultats:</p>
+      <textarea name="carrers_dificultats" rows="3"></textarea>
+
+      <p>Has trobat obstacles (mobiliari urbà, arbres, pots, etc.) que impedeixen el pas?</p>
+      <label><input type="radio" name="obstacles" value="Sí" required> Sí</label>
+      <label><input type="radio" name="obstacles" value="No"> No</label>
+      <label><input type="radio" name="obstacles" value="Alguns"> Alguns</label>
+
+      <p>Has trobat llocs per descansar al llarg de la ruta?</p>
+      <label><input type="radio" name="descans" value="Sí" required> Sí</label>
+      <label><input type="radio" name="descans" value="No"> No</label>
+      <label><input type="radio" name="descans" value="No ho necessitava"> No ho necessitava</label>
+
+      <p>Els passos de vianants eren accessibles i identificables?</p>
+      <label><input type="radio" name="passos_accessibles" value="Sí" required> Sí</label>
+      <label><input type="radio" name="passos_accessibles" value="No"> No</label>
+
+      <p>T’has sentit segur/a durant la ruta?</p>
+      <label><input type="radio" name="seguretat" value="Sí" required> Sí</label>
+      <label><input type="radio" name="seguretat" value="No"> No</label>
+
+      <p>Quin % d’accessibilitat li donaries a la ruta?</p>
+      <input type="number" name="percentatge_accessibilitat" min="0" max="100" required>
+
+      <p>Comentaris o suggeriments per millorar la ruta:</p>
+      <textarea name="comentaris" rows="4"></textarea>
+
+      <button type="submit">Enviar</button>
+    </form>
+  </div>
+</body>
+</html>

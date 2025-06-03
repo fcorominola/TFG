@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="ca">
+<head>
+  <meta charset="UTF-8">
+  <title>Ruta accessible</title>
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css" />
+  <style>
+    body {
+      margin: 0;
+      height: 100vh;
+      background-color: #73edff !important;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-family: Arial, sans-serif;
+      position: relative;
+      color: #000078;
+    }
+
+    .container {
+      background: rgba(255, 255, 255, 0.7);
+      padding: 30px;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.2);
+      max-width: 600px;
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    h2 {
+      margin-bottom: 1rem;
+    }
+
+    #map {
+      width: 100%;
+      height: 400px;
+      margin-bottom: 20px;
+      border: 2px solid #000078;
+      border-radius: 8px;
+    }
+
+    .finish-link {
+      background-color: #000078;
+      color: white;
+      text-decoration: none;
+      padding: 10px 20px;
+      border-radius: 5px;
+      font-size: 1rem;
+      transition: background-color 0.2s ease;
+    }
+
+    .finish-link:hover {
+      background-color: #000050;
+    }
+
+    .logo {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      width: 100px;
+    }
+  </style>
+</head>
+<body>
+  <img src="logo.png" alt="Logo" class="logo">
+  <div class="container">
+    <h2>Ruta trobada</h2>
+    <div id="map"></div>
+    <a href="/post_form/<%= searchId %>" class="finish-link">S'ha finalitzat la ruta</a>
+  </div>
+
+  <script src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js"></script>
+  <script>
+    const geojson = <%- JSON.stringify(geojson) %>;
+
+    const map = L.map('map').setView([41.3851, 2.1734], 14);
+
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      attribution: '© OpenStreetMap'
+    }).addTo(map);
+
+    const layer = L.geoJSON(geojson, {
+      style: { color: 'blue', weight: 5 }
+    }).addTo(map);
+
+    map.fitBounds(layer.getBounds());
+  </script>
+</body>
+</html>

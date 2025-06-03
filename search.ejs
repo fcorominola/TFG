@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="ca">
+<head>
+  <meta charset="UTF-8">
+  <title>Cerca de ruta</title>
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+  <style>
+    body {
+      margin: 0;
+      height: 100vh;
+      background-color: #73edff !important;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-family: Arial, sans-serif;
+      position: relative;
+      color: #000078;
+    }
+
+    .container {
+      background: rgba(255, 255, 255, 0.7);
+      padding: 30px;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.2);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      max-width: 500px;
+      width: 100%;
+    }
+
+    form {
+      display: flex;
+      flex-direction: column;
+      width: 100%;
+      color: #000078;
+    }
+
+    label, input {
+      margin-bottom: 10px;
+      width: 100%;
+      font-size: 1rem;
+    }
+
+    input {
+      padding: 0.5rem;
+      font-size: 1rem;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+    }
+
+    button {
+      margin-top: 10px;
+      background-color: #000078;
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 1rem;
+    }
+
+    button:hover {
+      background-color: #000050;
+    }
+
+    #map {
+      height: 400px;
+      width: 100%;
+      margin-top: 20px;
+      border: 2px solid #000078;
+      border-radius: 8px;
+    }
+
+    #finish-btn {
+      margin-top: 15px;
+      width: 100%;
+    }
+
+    .logo {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      width: 100px;
+    }
+
+    h1 {
+      margin-bottom: 1rem;
+    }
+
+    p {
+      margin-top: 1rem;
+    }
+  </style>
+</head>
+<body>
+  <img src="logo.png" alt="Logo" class="logo">
+  <div class="container">
+    <h1>Cerca d’origen i destí</h1>
+
+    <form action="/search" method="POST">
+      <input type="hidden" name="preFormId" value="<%= preFormId %>" />
+
+      <label for="origin">Origen:</label>
+      <input type="text" name="origin" id="origin" value="<%= originName || '' %>" required>
+
+      <label for="destination">Destí:</label>
+      <input type="text" name="destination" id="destination" value="<%= destName || '' %>" required>
+
+      <button type="submit">Buscar</button>
+    </form>
+
+    <% if (originLat && originLon && destLat && destLon) { %>
+      <div id="map"></div>
+
+      <button id="finish-btn">He finalitzat</button>
+
+      <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+      <script>
+        const origen = {
+          lat: <%= JSON.stringify(originLat) %>,
+          lon: <%= JSON.stringify(originLon) %>
+        };
+
+        const desti = {
+          lat: <%= JSON.stringify(destLat) %>,
+          lon: <%= JSON.stringify(destLon) %>
+        };
+
+        const map = L.map('map').setView(
+          [(origen.lat + desti.lat) / 2, (origen.lon + desti.lon) / 2],
+          14
+        );
+
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+          attribution: '© OpenStreetMap contributors'
+        }).addTo(map);
+
+        L.marker([origen.lat, origen.lon])
+          .addTo(map)
+          .bindPopup('Origen')
+          .openPopup();
+
+        L.marker([desti.lat, desti.lon])
+          .addTo(map)
+          .bindPopup('Destí');
+
+        const ruta = L.polyline(
+          [[origen.lat, origen.lon], [desti.lat, desti.lon]],
+          { color: 'blue' }
+        ).addTo(map);
+
+        map.fitBounds(ruta.getBounds());
+
+        document.getElementById('finish-btn').addEventListener('click', () => {
+          window.location.href = '/post_form/<%= searchId %>';
+        });
+      </script>
+    <% } else { %>
+      <p>Escriviu una ubicació d’origen i de destí per veure el mapa.</p>
+    <% } %>
+  </div>
+</body>
+</html>

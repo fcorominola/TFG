@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="ca">
+<head>
+  <meta charset="UTF-8">
+  <title>Formulari d'Accessibilitat</title>
+  <style>
+    body {
+      margin: 0;
+      height: 100vh;
+      background-color: #73edff !important;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-family: Arial, sans-serif;
+      position: relative;
+      color: #000078;
+    }
+
+    .container {
+      background: rgba(255, 255, 255, 0.7);
+      padding: 30px;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.2);
+      max-width: 600px;
+      width: 100%;
+      overflow-y: auto;
+      max-height: 90vh;
+    }
+
+    h1, h2, h3 {
+      margin-top: 0;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 5px;
+    }
+
+    p {
+      margin-top: 1rem;
+      font-weight: bold;
+    }
+
+    button {
+      margin-top: 20px;
+      background-color: #000078;
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 1rem;
+    }
+
+    button:hover {
+      background-color: #000050;
+    }
+
+    .logo {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      width: 100px;
+    }
+  </style>
+</head>
+<body>
+  <img src="logo.png" alt="Logo" class="logo">
+  <div class="container">
+    <h1>Formulari sobre accessibilitat</h1>
+    <form method="POST" action="/submit">
+      
+      <h2>Tipus de discapacitat:</h2>
+      <label><input type="checkbox" name="tipus_discapacitat" value="Mobilitat"> Mobilitat</label>
+      <label><input type="checkbox" name="tipus_discapacitat" value="Auditiva"> Auditiva</label>
+      <label><input type="checkbox" name="tipus_discapacitat" value="Visual"> Visual</label>
+
+      <h3>Mobilitat:</h3>
+      <p>Utilitzes algun dels següents elements per poder moure’t?</p>
+      <label><input type="checkbox" name="mobilitat_elements" value="Cadira de rodes"> Cadira de rodes</label>
+      <label><input type="checkbox" name="mobilitat_elements" value="Bastó"> Bastó</label>
+      <label><input type="checkbox" name="mobilitat_elements" value="Caminador"> Caminador</label>
+      <label><input type="checkbox" name="mobilitat_elements" value="Crosses"> Crosses</label>
+      <label><input type="checkbox" name="mobilitat_elements" value="Altres"> Altres</label>
+      <label><input type="checkbox" name="mobilitat_elements" value="Cap"> Cap</label>
+
+      <p>Vols evitar escales?</p>
+      <label><input type="radio" name="evitar_escales" value="Sí"> Sí</label>
+      <label><input type="radio" name="evitar_escales" value="No"> No</label>
+
+      <p>Tens dificultats per pujar o baixar rampes?</p>
+      <label><input type="radio" name="dificultats_rampes" value="Sí"> Sí</label>
+      <label><input type="radio" name="dificultats_rampes" value="No"> No</label>
+
+      <p>És important que totes les rampes tinguin barana?</p>
+      <label><input type="radio" name="baranes" value="Sí"> Sí</label>
+      <label><input type="radio" name="baranes" value="No"> No</label>
+
+      <p>Prefereixes rutes sense pendents o amb pendents suaus?</p>
+      <label><input type="radio" name="preferencia_pendents" value="Sí"> Sí</label>
+      <label><input type="radio" name="preferencia_pendents" value="No"> No</label>
+
+      <p>Tens dificultats per passar per carrers estrets (menys d’1,5 m)?</p>
+      <label><input type="radio" name="carrers_estrets" value="Sí"> Sí</label>
+      <label><input type="radio" name="carrers_estrets" value="No"> No</label>
+
+      <p>Vols una ruta amb zones de descans recurrents?</p>
+      <label><input type="radio" name="zones_descans" value="Sí, cada 100 m"> Sí, cada 100 m</label>
+      <label><input type="radio" name="zones_descans" value="Sí, cada 200 m"> Sí, cada 200 m</label>
+      <label><input type="radio" name="zones_descans" value="Sí, vull poder descansar en algún punt de la ruta"> Sí, vull descansar en algun punt</label>
+      <label><input type="radio" name="zones_descans" value="No"> No</label>
+
+      <p>Prefereixes evitar rutes molts transitades o sorolloses?</p>
+      <label><input type="radio" name="evitar_soroll" value="Sí"> Sí</label>
+      <label><input type="radio" name="evitar_soroll" value="No"> No</label>
+      
+      <button type="submit">Enviar</button>
+    </form>
+  </div>
+</body>
+</html>
